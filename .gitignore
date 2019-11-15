@@ -1,0 +1,8 @@
+.env
+env
+*.pyc
+*.pyd
+.idea
+.vscode
+.DS_Store
+*.sqlite3
