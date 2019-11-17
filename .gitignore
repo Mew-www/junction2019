@@ -6,3 +6,4 @@ env
 .vscode
 .DS_Store
 *.sqlite3
+/static

@@ -1,7 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include
-from django.http import HttpResponse
-import uuid
 from rest_framework.authtoken.views import obtain_auth_token
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -22,9 +20,10 @@ router.register(r'payments', PaymentViewSet, basename="Payment")
 router.register(r'items', ItemViewSet, basename="Item")
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('documentation/', schema_view.with_ui('swagger', cache_timeout=0), name='api-schema'),
-    path('test/', lambda request: HttpResponse(str(uuid.uuid4()))),
-    path('login/', obtain_auth_token, name='generate-token'),
-    path('', include(router.urls)),
+    path('api/', include([
+        path('admin/', admin.site.urls),
+        path('documentation/', schema_view.with_ui('swagger', cache_timeout=0), name='api-schema'),
+        path('login/', obtain_auth_token, name='generate-token'),
+        path('', include(router.urls)),
+    ]))
 ]
